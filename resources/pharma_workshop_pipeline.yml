@@ -1,7 +1,7 @@
 resources:
   jobs:
     pharma_workshop_pipeline:
-      name: Pharma Workshop — Data Generation Pipeline (DAB)
+      name: Pharma Workshop - Data Generation Pipeline (DAB)
       description: |
         Generates all structured data (for Genie Spaces) and PDF documents
         (for Knowledge Assistants) across three pharma workshop groups:

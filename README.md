@@ -1,14 +1,14 @@
-# Pharma Workshop — Genie, Knowledge Assistant & Genie Code
+# Pharma Workshop - Genie, Knowledge Assistant & Genie Code
 
 A complete, deployable Databricks Asset Bundle (DAB) that generates all synthetic data for a hands-on pharma workshop covering:
 
-- **Genie Spaces** — structured Delta tables for natural-language SQL exploration
-- **Knowledge Assistants (KA)** — PDF document corpora for RAG-based Q&A
-- **Genie Code** — advanced analytics with code generation on structured data
+- **Genie Spaces**
+- **Knowledge Assistants (KA)**
+- **Genie Code**
 
-Three parallel workshop groups (Commercial, Clinical, Supply Chain) each get their own schema, tables, and documents — ready for participants to build Genie Spaces, KAs, and Genie Code spaces from scratch.
+Three parallel workshop groups (Commercial, Clinical, Supply Chain) each get their own schema, tables, and documents, ready for participants to build Genie Spaces, KAs, and Genie Code spaces from scratch.
 
-Everything is parameterized — drop the bundle into any workspace, set a target catalog, and deploy.
+Everything is parameterized. Drop the bundle into any workspace, set a target catalog, and deploy.
 
 ---
 
@@ -28,7 +28,7 @@ Each schema also gets a `documents` volume where PDFs are stored.
 
 1. **Databricks CLI v0.218+** (DAB support): `databricks --version`
 2. **Unity Catalog** enabled on the workspace
-3. A catalog you have `CREATE` privileges on (default: `pharma_workshop` — change via `--var catalog=...`)
+3. A catalog you have `CREATE` privileges on (default: `pharma_workshop`, change via `--var catalog=...`)
 4. **Serverless notebook compute** enabled
 
 ---
@@ -55,14 +55,14 @@ databricks bundle deploy --var catalog=my_catalog
 # 4. Run the job (synchronous, follows logs)
 databricks bundle run pharma_workshop_pipeline
 
-# Or trigger via UI: Workflows -> "Pharma Workshop — Data Generation Pipeline (DAB)"
+# Or trigger via UI: Workflows -> "Pharma Workshop - Data Generation Pipeline (DAB)"
 ```
 
 ### Variables (override with `--var name=value`)
 
 | Variable | Default | Notes |
 |---|---|---|
-| `catalog` | `pharma_workshop` | Target catalog — must exist with CREATE privileges |
+| `catalog` | `pharma_workshop` | Target catalog, must exist with CREATE privileges |
 
 ---
 
@@ -94,12 +94,12 @@ genie_ka_geniecode_workshop/
 │   └── pharma_workshop_pipeline.yml       # 7-task job DAG
 ├── src/                                   # all notebooks (.py source format)
 │   ├── 01_setup.py                        # creates schemas and volumes
-│   ├── 02_commercial_structured_data.py   # 5 tables → wsp_commercial
-│   ├── 03_clinical_structured_data.py     # 5 tables → wsp_clinical
-│   ├── 04_supply_chain_structured_data.py # 5 tables → wsp_supply_chain
-│   ├── 05_commercial_pdfs.py             # 5 PDFs → wsp_commercial.documents
-│   ├── 06_clinical_pdfs.py               # 5 PDFs → wsp_clinical.documents
-│   └── 07_supply_chain_pdfs.py           # 5 PDFs → wsp_supply_chain.documents
+│   ├── 02_commercial_structured_data.py   # 5 tables, wsp_commercial
+│   ├── 03_clinical_structured_data.py     # 5 tables, wsp_clinical
+│   ├── 04_supply_chain_structured_data.py # 5 tables, wsp_supply_chain
+│   ├── 05_commercial_pdfs.py             # 5 PDFs, wsp_commercial.documents
+│   ├── 06_clinical_pdfs.py               # 5 PDFs, wsp_clinical.documents
+│   └── 07_supply_chain_pdfs.py           # 5 PDFs, wsp_supply_chain.documents
 └── docs/
     └── WORKSHOP_GUIDE.md                  # facilitator guide and group assignments
 ```
@@ -126,9 +126,8 @@ genie_ka_geniecode_workshop/
 
 After data generation is complete, participants follow these steps:
 
-1. **Build a Genie Space** — select tables from their group's schema, add sample questions, and explore data with natural language
-2. **Build a Knowledge Assistant** — point a KA at their group's `documents` volume, then ask questions against the PDF corpus
-3. **Build a Genie Code space** — create an advanced analytics space with code generation capabilities on the structured data
+1. **Build a Genie Space** using Genie Code to select tables from their group's schema, add sample questions, and explore data with natural language
+2. **Build a Knowledge Assistant** using Genie Code to point a KA at their group's `documents` volume, then ask questions against the PDF corpus
 
 ---
 
@@ -138,7 +137,7 @@ If you prefer to run notebooks manually (without the bundle):
 
 1. Upload the `src/` folder to your Databricks workspace
 2. Open each notebook and set the `catalog` widget to your target catalog
-3. Run `01_setup.py` first, then run `02`–`07` in any order
+3. Run `01_setup.py` first, then run `02` through `07` in any order
 
 ---
 
@@ -146,6 +145,6 @@ If you prefer to run notebooks manually (without the bundle):
 
 Installed automatically by each notebook at runtime (no pre-install needed):
 
-- `faker` — realistic synthetic data generation
-- `holidays` — US holiday calendar for date patterns
-- `fpdf2` — PDF document generation
+- `faker` - realistic synthetic data generation
+- `holidays` - US holiday calendar for date patterns
+- `fpdf2` - PDF document generation

@@ -31,9 +31,9 @@
 
 | Group | Schema | Focus |
 |---|---|---|
-| **1 — Commercial** | `wsp_commercial` | Sales analytics, HCP engagement, market access |
-| **2 — Clinical** | `wsp_clinical` | Trial management, patient safety, lab analytics |
-| **3 — Supply Chain** | `wsp_supply_chain` | Inventory optimization, manufacturing quality, logistics |
+| **1 - Commercial** | `wsp_commercial` | Sales analytics, HCP engagement, market access |
+| **2 - Clinical** | `wsp_clinical` | Trial management, patient safety, lab analytics |
+| **3 - Supply Chain** | `wsp_supply_chain` | Inventory optimization, manufacturing quality, logistics |
 
 ---
 
