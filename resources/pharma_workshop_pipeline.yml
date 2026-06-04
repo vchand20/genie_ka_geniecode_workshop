@@ -1,0 +1,82 @@
+resources:
+  jobs:
+    pharma_workshop_pipeline:
+      name: Pharma Workshop — Data Generation Pipeline (DAB)
+      description: |
+        Generates all structured data (for Genie Spaces) and PDF documents
+        (for Knowledge Assistants) across three pharma workshop groups:
+        Commercial, Clinical, and Supply Chain.
+
+      max_concurrent_runs: 1
+      timeout_seconds: 7200
+
+      environments:
+        - environment_key: Default
+          spec:
+            client: "1"
+
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+
+      tasks:
+        - task_key: setup
+          notebook_task:
+            notebook_path: ../src/01_setup.py
+            base_parameters:
+              catalog: ${var.catalog}
+          environment_key: Default
+
+        - task_key: commercial_structured_data
+          depends_on:
+            - task_key: setup
+          notebook_task:
+            notebook_path: ../src/02_commercial_structured_data.py
+            base_parameters:
+              catalog: ${var.catalog}
+          environment_key: Default
+
+        - task_key: clinical_structured_data
+          depends_on:
+            - task_key: setup
+          notebook_task:
+            notebook_path: ../src/03_clinical_structured_data.py
+            base_parameters:
+              catalog: ${var.catalog}
+          environment_key: Default
+
+        - task_key: supply_chain_structured_data
+          depends_on:
+            - task_key: setup
+          notebook_task:
+            notebook_path: ../src/04_supply_chain_structured_data.py
+            base_parameters:
+              catalog: ${var.catalog}
+          environment_key: Default
+
+        - task_key: commercial_pdfs
+          depends_on:
+            - task_key: setup
+          notebook_task:
+            notebook_path: ../src/05_commercial_pdfs.py
+            base_parameters:
+              catalog: ${var.catalog}
+          environment_key: Default
+
+        - task_key: clinical_pdfs
+          depends_on:
+            - task_key: setup
+          notebook_task:
+            notebook_path: ../src/06_clinical_pdfs.py
+            base_parameters:
+              catalog: ${var.catalog}
+          environment_key: Default
+
+        - task_key: supply_chain_pdfs
+          depends_on:
+            - task_key: setup
+          notebook_task:
+            notebook_path: ../src/07_supply_chain_pdfs.py
+            base_parameters:
+              catalog: ${var.catalog}
+          environment_key: Default

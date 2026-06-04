@@ -1,0 +1,29 @@
+bundle:
+  name: genie-ka-geniecode-workshop
+
+variables:
+  catalog:
+    description: Unity Catalog where all schemas, tables, and volumes are created. Must already exist with CREATE privileges.
+    default: pharma_workshop
+
+include:
+  - resources/*.yml
+
+# Workspace host is intentionally NOT pinned. DAB resolves the host from (in order):
+#   1. DATABRICKS_HOST env var
+#   2. DATABRICKS_CONFIG_PROFILE env var (a profile in ~/.databrickscfg)
+#   3. The DEFAULT profile in ~/.databrickscfg
+# To deploy to a specific workspace, either set DATABRICKS_HOST or run:
+#   databricks bundle deploy -p <profile_name>
+targets:
+  dev:
+    mode: development
+    default: true
+
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/Shared/genie-ka-geniecode-workshop
+    permissions:
+      - level: CAN_VIEW
+        group_name: users
